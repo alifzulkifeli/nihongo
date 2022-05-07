@@ -12,7 +12,7 @@ export default function Home() {
   const router = useRouter()
 
   async function getData() {
-    const res = await fetch('http://nihongo-api.alifzulkifeli.com/random')
+    const res = await fetch('https://nihongo.alifzulkifeli.com/api/hello')
     const data = await res.json()
     setrdata({ data })
     setexample(JSON.parse(data.example))
