@@ -1,9 +1,10 @@
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react';
-
+import Head from 'next/head'
 
 
 export default function Home() {
+
 
   const [rdata, setrdata] = useState()
   const [example, setexample] = useState()
@@ -30,7 +31,14 @@ export default function Home() {
 
 
   return (
-    rdata ?
+    <div>
+      <div>
+        <Head>
+          <title>Nihongo Kotoba</title>
+          < meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"/>
+        </Head>
+      </div>
+      rdata ?
       <div className="bg-gray-100" >
         <div className=" grid justify-end" >
           <h1 className='pt-5 pr-6 text-5xl text-blue-500 ' onClick={() => router.push('/add')} >{"+"}</h1>
@@ -46,7 +54,7 @@ export default function Home() {
                 {example.example2 && <p className='text-lg' >- {example.example2}</p>}
                 {example.example3 && <p className='text-lg ' >- {example.example3}</p>}
 
-<div className='p-4' ></div>
+                <div className='p-4' ></div>
                 <span className='text-4xl mt-4' onClick={reload} >🔄</span>
               </>
             )}
@@ -56,7 +64,8 @@ export default function Home() {
         </div>
 
       </div> :
-      <>Loading</>
+      Loading
+    </div>
   )
 }
 
