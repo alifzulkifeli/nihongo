@@ -35,7 +35,7 @@ export default function Home() {
       <div>
         <Head>
           <title>Nihongo Kotoba</title>
-          < meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"/>
+          < meta httpEquiv="Content-Security-Policy" content="upgrade-insecure-requests"/>
         </Head>
       </div>
       rdata ?
