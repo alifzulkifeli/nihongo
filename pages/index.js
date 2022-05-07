@@ -32,20 +32,14 @@ export default function Home() {
 
   return (
     <div>
-      <div>
-        <Head>
-          <title>Nihongo Kotoba</title>
-          < meta httpEquiv="Content-Security-Policy" content="upgrade-insecure-requests"/>
-        </Head>
-      </div>
-      rdata ?
+      
       <div className="bg-gray-100" >
         <div className=" grid justify-end" >
           <h1 className='pt-5 pr-6 text-5xl text-blue-500 ' onClick={() => router.push('/add')} >{"+"}</h1>
         </div>
         <div className="bg-gray-100h h-screen  float-none ">
           <div className="bg-gray-100 mt-52 w-full text-center lg:w-1/2 rounded  ">
-            {rdata.data && (
+            { rdata && (
               <>
                 <p className=' text-7xl ' >{rdata.data.word} </p>
                 <p className=' text-xl font-bold text-blue-500 pt-3  '>{rdata.data.meaning}</p>
