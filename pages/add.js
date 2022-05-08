@@ -1,67 +1,48 @@
 import { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { useRouter } from 'next/router'
+import { supabase } from '../lib/supabse';
 
 const Add = () => {
   const router = useRouter()
-  const [data, setdata] = useState({
+  const [sdata, setsdata] = useState({
     word: "",
     meaning: "",
     explaination: "",
     example: ""
   })
 
-  const handleSubmit = () => {
-    if (!data.word) { toast.error("Word is required"); return }
-    if (!data.meaning) { toast.error("Translation is required"); return }
+  const handleSubmit = async () => {
+    if (!sdata.word) { toast.error("Word is required"); return }
+    if (!sdata.meaning) { toast.error("Translation is required"); return }
+
     const example = {
-      example1: data.example1,
-      example2: data.example2,
-      example3: data.example3
+      example1: sdata.example1,
+      example2: sdata.example2,
+      example3: sdata.example3
     }
 
-    try {
-      const response = fetch(
-        `http://nihongo-api.alifzulkifeli.com/add`,
+    const { data, error } = await supabase
+      .from('words')
+      .insert([
         {
-          body: JSON.stringify({
-            word: data.word,
-            meaning: data.meaning,
-            explaination: data.explaination,
-            example: JSON.stringify(example)
-          }),
-          headers: { "Content-Type": "application/json" },
-          method: 'POST'
-        }
+          word: sdata.word,
+          meaning: sdata.meaning,
+          explaination: sdata.explaination,
+          example: JSON.stringify(example)
+        },
+      ])
 
-      ).then(resp => {
-        if (resp.status === 200) {
-          return resp.json()
-        } else {
-          console.log("Status: " + resp.status)
-          return Promise.reject("server")
-        }
-      })
-        .then(dataJson => {
-          console.log(dataJson);
-        })
-        console.log(response);
-      toast.promise(response, {
-        loading: 'Loading',
-        success: 'Success',
-        error: 'Error when adding',
-      })
-
-
-    } catch (error) {
       console.log(error);
-      toast.error("Error occured")
-    }
 
+      if (data) {
+        router.push('/')
+        toast.success("Succes")
+      }
   }
 
   const handleChange = (e) => {
-    setdata({ ...data, [e.target.name]: e.target.value })
+    setsdata({ ...sdata, [e.target.name]: e.target.value })
   }
 
 

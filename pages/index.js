@@ -1,9 +1,10 @@
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react';
 import Head from 'next/head'
-
+import { supabase } from '../lib/supabse';
 
 export default function Home() {
+
 
 
   const [rdata, setrdata] = useState()
@@ -12,8 +13,14 @@ export default function Home() {
   const router = useRouter()
 
   async function getData() {
-    const res = await fetch('https://nihongo.alifzulkifeli.com/api/hello')
-    const data = await res.json()
+
+    const { data, error, count } = await supabase
+    .from('random_word')
+    .select('*')
+    .limit(1)
+    .single()// if you don't want to return any rows, you can use { count: 'exact', head: true }
+
+    console.log( data, error, count );
     setrdata({ data })
     setexample(JSON.parse(data.example))
     console.log(example);
@@ -24,6 +31,7 @@ export default function Home() {
     getData()
   }
 
+
   useEffect(() => {
     getData()
   }, [])
@@ -32,14 +40,14 @@ export default function Home() {
 
   return (
     <div>
-      
+
       <div className="bg-gray-100" >
         <div className=" grid justify-end" >
           <h1 className='pt-5 pr-6 text-5xl text-blue-500 ' onClick={() => router.push('/add')} >{"+"}</h1>
         </div>
         <div className="bg-gray-100h h-screen  float-none ">
           <div className="bg-gray-100 mt-52 w-full text-center lg:w-1/2 rounded  ">
-            { rdata && (
+            {rdata && (
               <>
                 <p className=' text-7xl ' >{rdata.data.word} </p>
                 <p className=' text-xl font-bold text-blue-500 pt-3  '>{rdata.data.meaning}</p>
