@@ -7,6 +7,7 @@ const Add = () => {
   const router = useRouter()
   const [sdata, setsdata] = useState({
     word: "",
+    furigana:"",
     meaning: "",
     explaination: "",
     example: ""
@@ -27,6 +28,7 @@ const Add = () => {
       .insert([
         {
           word: sdata.word,
+          furigana: sdata.furigana,
           meaning: sdata.meaning,
           explaination: sdata.explaination,
           example: JSON.stringify(example)
@@ -54,6 +56,9 @@ const Add = () => {
 
         <div className="flex items-center mb-5">
           <input name="word" id="name" type="text" placeholder="Word" className=" bg-gray-100 border-b-2 border-gray-400 flex-1 py-2 placeholder-gray-300 outline-none focus:border-blue-400" onChange={(e) => handleChange(e)} />
+        </div>
+        <div className="flex items-center mb-5">
+          <input name="furigana" type="text" placeholder="Furigana" className=" bg-gray-100 border-b-2 border-gray-400 flex-1 py-2 placeholder-gray-300 outline-none focus:border-blue-400" onChange={(e) => handleChange(e)} />
         </div>
         <div className="flex items-center mb-5">
           <input type="text" name="meaning" placeholder="Translation" className=" bg-gray-100  border-b-2 border-gray-400 flex-1 py-2 placeholder-gray-300 outline-none focus:border-blue-400" onChange={(e) => handleChange(e)} />

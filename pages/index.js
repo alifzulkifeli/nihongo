@@ -61,6 +61,8 @@ export default function Home() {
             <div className="bg-gray-100 mt-52 w-full text-center lg:w-1/2 rounded  ">
               {rdata && (
                 <>
+                  <p className=' text-lg ' >{rdata.data.furigana} </p>
+
                   <p className=' text-7xl ' >{rdata.data.word} </p>
                   <p className=' text-xl font-bold text-blue-500 pt-3  '>{rdata.data.meaning}</p>
                   <p className='text-lg' >{rdata.data.explaination}</p>
