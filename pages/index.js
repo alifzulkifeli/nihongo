@@ -28,6 +28,21 @@ export default function Home() {
     getData()
   }
 
+  const handleDelete = async (id) => {
+    console.log(id);
+
+    const { data, error } = await supabase
+      .from('words')
+      .delete()
+      .eq('id', id)
+
+    if (data) {
+      setrdata()
+      getData()
+    }
+
+  }
+
 
   useEffect(() => {
     getData()
@@ -57,6 +72,9 @@ export default function Home() {
                   <span className='text-4xl mt-4' onClick={reload} >🔄</span>
                 </>
               )}
+              <div className=' text-red-600 pt-20 text-xl ' onClick={() => handleDelete(rdata.data.id)} >
+                delete
+              </div>
 
             </div>
 
